@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  /* Warm off-white canvas: easier on the eyes than stark grey, keeps
+     white cards crisp without glare. */
+  background: #e6ebf2;
+  color: #1e293b;
+  @apply antialiased;
+}
+
+/* Jump-target flash for stepper navigation */
+.fg-flash {
+  animation: fg-flash-ring 1.4s ease-out;
+  border-radius: 0.5rem;
+}
+@keyframes fg-flash-ring {
+  0%,
+  60% {
+    box-shadow: 0 0 0 3px rgba(232, 119, 34, 0.65);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 119, 34, 0);
+  }
+}
+
+/* Leaflet font + tooltip polish */
+.leaflet-container {
+  font-family: 'Public Sans', Inter, 'Noto Sans Devanagari', system-ui,
+    sans-serif;
+  background: #dde5ec;
+  z-index: 0;
+}
+/* Tailwind preflight sets img { max-width: 100% } — that silently breaks
+   Leaflet tiles/markers (blank or shredded map). Neutralise it inside maps. */
+.leaflet-container img {
+  max-width: none !important;
+}
+.leaflet-tooltip.fg-tip {
+  @apply rounded-lg border border-slate-200 shadow-lg text-xs leading-relaxed;
+}
+
+/* Slim scrollbars for panels */
+.slim-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.slim-scroll::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-slate-300;
+}
+.slim-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Range slider */
+input[type='range'].fg-range {
+  @apply w-full cursor-pointer accent-navy-700;
+}
+
+/* Print: bulletin mode — inspector + map only */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}

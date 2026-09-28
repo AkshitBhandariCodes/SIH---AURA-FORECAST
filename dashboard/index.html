@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AURA-CAST - National Meteorological Forecast Reliability & Bust Prediction Platform developed by Team AURA FARMERS for MoES, NCMRWF and IMD."
+    />
+    <title>AURA-CAST | National Meteorological Forecast Reliability & Bust Prediction Platform</title>
+    <style>
+      #fg-boot-fallback {
+        display: none;
+        max-width: 640px;
+        margin: 8vh auto;
+        padding: 24px;
+        font-family: system-ui, sans-serif;
+        color: #0b3d6b;
+        background: #fff;
+        border: 2px solid #b91c1c;
+        border-radius: 12px;
+      }
+      #fg-boot-fallback h1 {
+        font-size: 18px;
+        margin: 0 0 8px;
+      }
+      #fg-boot-fallback pre {
+        background: #f1f5f9;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 12px;
+        white-space: pre-wrap;
+      }
+    </style>
+    <script type="module" crossorigin src="./assets/index-Cc_33Y8j.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DauRGFah.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="max-width:640px;margin:8vh auto;padding:24px;font-family:system-ui">
+        <h1>AURA-CAST needs JavaScript</h1>
+        <p>Please enable JavaScript and reload. The API is still reachable at
+        <a href="/api/v1/health">/api/v1/health</a>.</p>
+      </div>
+    </noscript>
+    <div id="fg-boot-fallback" role="alert">
+      <h1>Dashboard did not start</h1>
+      <p>
+        The page shell loaded but the app bundle did not render. Common fixes:
+        hard-refresh (<b>Ctrl+Shift+R</b>), disable script-blockers for
+        127.0.0.1, or restart the backend with
+        <code>python src/api/server.py</code>.
+      </p>
+      <pre id="fg-boot-detail">collecting diagnostics…</pre>
+    </div>
+    <script>
+      // Boot watchdog: turns a silent white screen into an actionable message.
+      window.__fgErrors = [];
+      window.addEventListener('error', function (e) {
+        window.__fgErrors.push(String((e && e.message) || e));
+      });
+      window.addEventListener('unhandledrejection', function (e) {
+        window.__fgErrors.push('promise: ' + String((e && e.reason) || e));
+      });
+      setTimeout(function () {
+        var root = document.getElementById('root');
+        var rendered = root && root.childElementCount > 0;
+        if (rendered) return;
+        var detail = 'js errors: ' + (window.__fgErrors.join(' | ') || 'none captured');
+        fetch('/api/v1/health')
+          .then(function (r) { return r.text(); })
+          .then(function (t) { detail += '\n/api/v1/health: OK (' + t.slice(0, 80) + ')'; })
+          .catch(function (err) { detail += '\n/api/v1/health: UNREACHABLE (' + err + ')'; })
+          .finally(function () {
+            document.getElementById('fg-boot-detail').textContent = detail;
+            document.getElementById('fg-boot-fallback').style.display = 'block';
+          });
+      }, 9000);
+      // Hide the fallback the moment React paints.
+      new MutationObserver(function () {
+        var root = document.getElementById('root');
+        if (root && root.childElementCount > 0) {
+          var fb = document.getElementById('fg-boot-fallback');
+          if (fb) fb.style.display = 'none';
+          this.disconnect();
+        }
+      }).observe(document.getElementById('root'), { childList: true });
+    </script>
+  </body>
+</html>

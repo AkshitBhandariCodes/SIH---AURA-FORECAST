@@ -1,0 +1,40 @@
+# SIH26079 — ForecastGuard AI Prototype Requirements
+# NOTE for Windows Users:
+# cfgrib and eccodes require the ECMWF eccodes C-library.
+# If installing on native Windows, it is strongly recommended to install via Conda:
+#   conda install -c conda-forge eccodes python-eccodes cfgrib
+# Alternatively, run inside WSL2 (Ubuntu):
+#   sudo apt-get install libeccodes-dev
+# Then run: pip install -r requirements.txt
+
+requests>=2.32
+numpy>=1.26
+pandas>=2.2
+scipy>=1.13
+xarray>=2024.1
+dask>=2024.1
+zarr>=2.18
+netCDF4>=1.7
+cfgrib>=0.9.14
+eccodes>=2.36
+s3fs>=2024.3
+fsspec>=2024.3
+cdsapi>=0.7.7
+pyarrow>=15.0
+tqdm>=4.66
+
+# ML & Explainability
+scikit-learn>=1.5
+xgboost>=2.1
+lightgbm>=4.5
+shap>=0.45
+
+# API & Service
+fastapi>=0.115
+uvicorn>=0.30
+pydantic>=2.7
+
+# Geospatial & Visualization
+geopandas>=1.0
+shapely>=2.0
+matplotlib>=3.8
