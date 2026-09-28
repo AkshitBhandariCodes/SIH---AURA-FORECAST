@@ -21,7 +21,7 @@ Thumbs.db
 docs/*.png
 docs/*.jpg
 docs/*.jpeg
-docs/*.pdf
 slides.md
 docs/SLIDES.md
 docs/script.md
+config.bat
